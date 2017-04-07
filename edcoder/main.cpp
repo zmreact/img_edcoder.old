@@ -8,16 +8,17 @@
 #include <QTextStream>
 
 using namespace std;
+QTextStream out(stdout);
 
+int main(int argc, char *argv[]);
 void encoder();
+void decoder();
 
 int main(int argc, char *argv[])
 {
-    QTextStream out(stdout);
     QCoreApplication ed(argc, argv);
     ed.setApplicationName("Encoder/Decoder");
     ed.setApplicationVersion("1.0");
-
 
 
     /* parser declaration */
@@ -33,9 +34,6 @@ int main(int argc, char *argv[])
     parser.addOption(encode);
     parser.addOption(decode);
     parser.addOption(help);
-    encode.~QCommandLineOption();
-    decode.~QCommandLineOption();
-    help.~QCommandLineOption();
 
     QStringList helptextQSL;
     helptextQSL << parser.helpText().split("\n");
@@ -43,39 +41,35 @@ int main(int argc, char *argv[])
     helptextQSL.removeFirst();
     helptextQSL.removeLast();
     QString helptext = (QString) helptextQSL.join("\n");
-    helptextQSL.~QList<QString>();
+
 
     parser.process(ed);
-
 
 
     /* welcome message */
     QStringList WelcomeMessageQSL;
     WelcomeMessageQSL << "Moscow Technical University of Communication and Informatics" << "\n" << "Department of multimedia networks and communication services" << "\n" << "Course work on MSKvSPD" << "\n" << "Student group: BSU1401" << "\n" << "Developers:" << " " << "Denis Petuhov" << "," << " " << "etc." << "\n" << "\n" << ed.applicationName() << "." << " " << "Version" << " " << ed.applicationVersion() << "\n" << "\n"
                       << "Usage:" << " " << argv[0] << " " << "[-e string] [-d code]" << "\n"
-                      << helptext << "\n";
+                      << helptext << "\n" "\n";
     QString WelcomeMessage = (QString) WelcomeMessageQSL.join("");
-    WelcomeMessageQSL.~QList<QString>();
-
+    out << WelcomeMessage;
 
 
     /* options switch */
     switch (parser.optionNames().isEmpty()) {
     case 1:
-        out << WelcomeMessage;
         break;
     case 0:
         if (parser.optionNames()[0] == QString("e")) {
             encoder();
         } else if (parser.optionNames()[0] == QString("d")) {
-            out << endl << "Option -d is hit!" << endl;
+            decoder();
         } else if (parser.optionNames()[0] == QString("h")) {
-            out << WelcomeMessage;
+            /* just nothing happens*/
         } else break;
     default:
         break;
     }
-
 
 
     return 0;
@@ -83,6 +77,10 @@ int main(int argc, char *argv[])
 
 void encoder()
 {
-    QTextStream out(stdout);
-    out << endl << "Option -e is hit!" << endl;
+    out << "Option -e is hit!" << endl;
+}
+
+void decoder()
+{
+    out << "Option -d is hit!" << endl;
 }
