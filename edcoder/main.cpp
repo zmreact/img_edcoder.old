@@ -7,15 +7,14 @@
 #include <stdio.h>
 #include <QTextStream>
 
-using namespace std;
-QTextStream out(stdout);
+#include <encoder.h>
+#include <decoder.h>
 
-int main(int argc, char *argv[]);
-void encoder();
-void decoder();
+using namespace std;
 
 int main(int argc, char *argv[])
 {
+    QTextStream out(stdout);
     QCoreApplication ed(argc, argv);
     ed.setApplicationName("Encoder/Decoder");
     ed.setApplicationVersion("1.0");
@@ -61,9 +60,9 @@ int main(int argc, char *argv[])
         break;
     case 0:
         if (parser.optionNames()[0] == QString("e")) {
-            encoder();
+            encoder(out);
         } else if (parser.optionNames()[0] == QString("d")) {
-            decoder();
+            decoder(out);
         } else if (parser.optionNames()[0] == QString("h")) {
             /* just nothing happens*/
         } else break;
@@ -75,12 +74,4 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void encoder()
-{
-    out << "Option -e is hit!" << endl;
-}
 
-void decoder()
-{
-    out << "Option -d is hit!" << endl;
-}
