@@ -1,5 +1,3 @@
-/* just for a test*/
-
 #include <QCoreApplication>
 #include <QDebug>
 #include <QString>
