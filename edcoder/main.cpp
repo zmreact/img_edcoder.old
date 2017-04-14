@@ -66,9 +66,9 @@ int main(int argc, char *argv[])
         break;
     case 0:
         if (parser.optionNames()[0] == QString("e")) {
-            encoder(out);
+            encoder(out, parser.value("e"));
         } else if (parser.optionNames()[0] == QString("d")) {
-            decoder(out);
+            decoder(out, parser.value("d"));
         } else if (parser.optionNames()[0] == QString("h")) {
             /* just nothing happens*/
         } else break;
@@ -79,5 +79,4 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-
 

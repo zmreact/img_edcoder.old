@@ -3,4 +3,4 @@
 #endif // ENCODER_H
 #include <QTextStream>
 
-void encoder(QTextStream&);
+void encoder(QTextStream&, QString);

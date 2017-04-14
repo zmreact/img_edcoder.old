@@ -3,4 +3,4 @@
 #endif // DECODER_H
 #include <QTextStream>
 
-void decoder(QTextStream&);
+void decoder(QTextStream&, QString);
