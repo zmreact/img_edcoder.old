@@ -1,4 +1,4 @@
-/* вот так то лучше */
+/* сделал хуже */
 #include <QCoreApplication>
 #include <QDebug>
 #include <QString>
