@@ -1,6 +1,4 @@
-/* test*/
-
-
+/* some strange test */
 #include <QCoreApplication>
 #include <QDebug>
 #include <QString>
