@@ -1,4 +1,3 @@
-/*всё исправил*/
 #include <QCoreApplication>
 #include <QDebug>
 #include <QString>
