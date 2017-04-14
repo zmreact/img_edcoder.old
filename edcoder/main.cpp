@@ -1,5 +1,4 @@
-/* сделал хуже */
-/* сделал еще хуже */
+/*всё исправил*/
 #include <QCoreApplication>
 #include <QDebug>
 #include <QString>
