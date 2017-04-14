@@ -1,4 +1,4 @@
-/* tetsssss */
+/* вот так то лучше */
 #include <QCoreApplication>
 #include <QDebug>
 #include <QString>
