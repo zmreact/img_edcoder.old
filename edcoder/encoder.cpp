@@ -2,5 +2,5 @@
 
 void encoder(QTextStream& out)
 {
-    out << "Option -e is hit!" << endl;
+    out << "Encoding started" << endl;
 }
