@@ -2,5 +2,5 @@
 
 void decoder(QTextStream& out)
 {
-    out << "Decoding started" << endl;
+    out << "Option -d is hit!" << endl;
 }
