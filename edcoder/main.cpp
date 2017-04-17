@@ -6,9 +6,12 @@
 #include <QStringList>
 #include <stdio.h>
 #include <QTextStream>
+#include <QImage>
+#include <QImageReader>
 
 #include <encoder.h>
 #include <decoder.h>
+#include <imagereader.h>
 
 using namespace std;
 
@@ -24,10 +27,10 @@ int main(int argc, char *argv[])
     QCommandLineParser parser;
     QCommandLineOption encode(QStringList() << "e" << "encode",
             "Encode <image file to encode>",
-            "string");
+            "path");
     QCommandLineOption decode(QStringList() << "d" << "decode",
             "Decode <image file to decode>",
-            "code");
+            "path");
     QCommandLineOption help(QStringList() << "h" << "help",
             "Shows this help");
     parser.addOption(encode);
@@ -41,7 +44,6 @@ int main(int argc, char *argv[])
     helptextQSL.removeLast();
     QString helptext = (QString) helptextQSL.join("\n");
 
-
     parser.process(ed);
 
 
@@ -51,11 +53,15 @@ int main(int argc, char *argv[])
                       << "Developers:" << " " << "Denis Petuhov" << "," << "\n"
                       << "            " << "Korotygin Aleksandr" << "," << "\n"
                       << "            " << "Kaledina Anastasija" << "," << "\n"
-                      << "            " << "Gubankova Ekaterina" << "." << "\n" << "\n"
-                      << ed.applicationName() << "." << " " << "Version" << " " << ed.applicationVersion() << "\n" << "\n"
+                      << "            " << "Gubankova Ekaterina" << "." << "\n"
+                      << "\n"
+                      << ed.applicationName() << "." << " " << "Version" << " " << ed.applicationVersion() << "\n"
+                      << "\n"
                       << "Usage:" << " " << argv[0] << " " << "[-e image file to encode] [-d image file to encode]" << "\n"
-                      << "Supported file image formats: *.tif, *.tiff" << "\n" << "\n"
-                      << helptext << "\n" "\n";
+                      << "Supported file image formats:" << " " << QImageReader::supportedImageFormats().join(", ") << "\n"
+                      << "\n"
+                      << helptext << "\n"
+                      << "\n";
     QString WelcomeMessage = (QString) WelcomeMessageQSL.join("");
     out << WelcomeMessage;
 
@@ -66,9 +72,13 @@ int main(int argc, char *argv[])
         break;
     case 0:
         if (parser.optionNames()[0] == QString("e")) {
-            encoder(out, parser.value("e"));
+            QString path = parser.value("e");
+            encoder(out, path);
+            readimageblock(out, path);
+            out << endl;
         } else if (parser.optionNames()[0] == QString("d")) {
             decoder(out, parser.value("d"));
+            out << endl;
         } else if (parser.optionNames()[0] == QString("h")) {
             /* just nothing happens*/
         } else break;
