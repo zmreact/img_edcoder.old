@@ -3,24 +3,27 @@
 #include <QImageReader>
 #include <QColor>
 
-void readimageblock(QTextStream& out, QString path)
+bool readimageblock(QTextStream& out, QString path)
 {
     QImage img(path);
-    out << "Width: " << img.width() << endl;
-    out << "Height: " << img.height() << endl;
-    out << "Depth: " << img.bitPlaneCount() << endl;
-    out << "Bytes per line: " << img.bytesPerLine() << endl;
-
-    for (int i = 0; i < img.height(); i++)
+    if (img.isNull()!=true)
     {
-        QRgb *rowData = (QRgb *) img.scanLine(i);
-        for (int j = 0; j < img.width(); j++)
+        out << "Width: " << img.width() << endl;
+        out << "Height: " << img.height() << endl;
+        out << "Depth: " << img.bitPlaneCount() << endl;
+        out << "Bytes per line: " << img.bytesPerLine() << endl;
+
+        for (int i = 0; i < img.height(); i++)
         {
-            QRgb pixelData = rowData[j];
-            int red = qRed(pixelData),
-                green = qGreen(pixelData),
-                blue = qBlue(pixelData);
-            out << i*img.width()+j+1 << " " << "pixel data: " << "R" << red << "G" << green << "B" << blue << endl;
+            QRgb *rowData = (QRgb *) img.scanLine(i);
+            for (int j = 0; j < img.width(); j++)
+            {
+                QRgb pixelData = rowData[j];
+                int red = qRed(pixelData),
+                    green = qGreen(pixelData),
+                    blue = qBlue(pixelData);
+                out << i*img.width()+j+1 << " " << "pixel data: " << "R" << red << "G" << green << "B" << blue << endl;
+            }
         }
-    }
+     } else return false;
 }
