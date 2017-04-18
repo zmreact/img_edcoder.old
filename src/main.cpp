@@ -73,8 +73,8 @@ int main(int argc, char *argv[])
     case 0:
         if (parser.optionNames()[0] == QString("e")) {
             QString path = parser.value("e");
+            readimage(out, path);
             encoder(out, path);
-            readimageblock(out, path);
             out << endl;
         } else if (parser.optionNames()[0] == QString("d")) {
             decoder(out, parser.value("d"));
