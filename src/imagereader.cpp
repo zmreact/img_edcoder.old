@@ -13,7 +13,7 @@ void readimageblock(QTextStream& out, QString path)
 
     for (int i = 0; i < img.height(); i++)
     {
-        QRgb *rowData = (QRgb*)img.scanLine(i);
+        QRgb *rowData = (QRgb *) img.scanLine(i);
         for (int j = 0; j < img.width(); j++)
         {
             QRgb pixelData = rowData[j];
