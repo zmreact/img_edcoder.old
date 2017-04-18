@@ -9,9 +9,9 @@
 #include <QImage>
 #include <QImageReader>
 
-#include <../include/encoder.h>
-#include <../include/decoder.h>
-#include <../include/imagereader.h>
+#include <encoder.h>
+#include <decoder.h>
+#include <imagereader.h>
 
 using namespace std;
 
